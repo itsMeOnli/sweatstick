@@ -1,5 +1,7 @@
 # fallguys-pose
 
+Part of [Sweatstick](../README.md) — webcam as a game controller, so that playing is the workout.
+
 Play Fall Guys with your body. A webcam tracks your pose and drives a **virtual Xbox controller**, so the game sees a normal gamepad — you run in place to move, lean to steer, and hop to jump.
 
 A Fall Guys race round is roughly two minutes of near-constant forward input, which means you end up doing two-minute cardio intervals whether you planned to or not.

@@ -42,8 +42,8 @@ dev = [
 fallguys-pose = "fallguys_pose.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/itsMeOnli/motion-game-controller"
-Issues = "https://github.com/itsMeOnli/motion-game-controller/issues"
+Homepage = "https://github.com/itsMeOnli/sweatstick"
+Issues = "https://github.com/itsMeOnli/sweatstick/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/fallguys_pose"]
