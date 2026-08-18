@@ -1,0 +1,22 @@
+# Local settings — check in fallguys.toml.example instead, since the tuned
+# values are specific to one room, one camera and one body.
+fallguys.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/

@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fallguys-pose"
+version = "0.1.0"
+description = "Play Fall Guys with your body: webcam pose tracking to a virtual Xbox controller"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Aman Mohammed" }]
+keywords = ["mediapipe", "pose", "gamepad", "fall-guys", "motion-control", "exergaming"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Games/Entertainment",
+]
+
+# MediaPipe has no wheels for 3.13+, and needs 3.11 or 3.12.
+requires-python = ">=3.11,<3.13"
+
+dependencies = [
+    "opencv-python>=4.8",
+    "mediapipe==0.10.14",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+# Windows only: vgamepad drives the ViGEmBus kernel driver.
+gamepad = ["vgamepad>=0.1.0"]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+fallguys-pose = "fallguys_pose.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/itsMeOnli/motion-game-controller"
+Issues = "https://github.com/itsMeOnli/motion-game-controller/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fallguys_pose"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 95
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

@@ -1,0 +1,58 @@
+# Copy to fallguys.toml and edit. Every value here is a default — delete any
+# line you are not actually changing.
+#
+# Run `fallguys-pose tune` after editing: the HUD draws a white tick at each
+# threshold, so you can watch a bar cross its tick instead of guessing.
+
+[camera]
+# Device index from `fallguys-pose check-camera`, or an MJPEG URL for a phone
+# (Android's IP Webcam app needs no driver at all):
+#   source = "http://192.168.1.5:8080/video"
+source = 0
+
+# dshow is the reliable Windows backend. The default (msmf) opens fine on many
+# laptop webcams and then never delivers a frame.
+backend = "dshow"
+
+# 640x480 on purpose. MediaPipe downsamples internally, so higher capture
+# resolution buys almost no accuracy while heating a phone-as-webcam enough to
+# throttle it to black frames after ~10 minutes.
+width = 640
+height = 480
+
+[pose]
+# Drop to 0 if you fall below 25fps. Small accuracy loss, real latency win —
+# and latency is what decides whether Hit Parade is fun or infuriating.
+model_complexity = 1
+
+[tuning]
+# --- Steering ---
+# Lean, in torso-lengths, for full stick deflection. Lower it if you have to
+# fall over to turn.
+lean_full = 0.25
+
+# --- Running in place ---
+# Knee lift that counts as a step. Lower to 0.06 if running never registers —
+# though the usual cause is your knees being cropped out of frame.
+step_threshold = 0.10
+# Steps/sec where you start moving, and where you hit full speed.
+cadence_min = 1.2
+cadence_max = 3.5
+
+# --- Jump ---
+# THE ONE YOU WILL TOUCH FIRST. Your hips bob while running in place; if that
+# bob crosses this, you jump constantly. Raise to 0.22, then 0.25, until a
+# 30-second run is clean — but no higher than still catches a real hop.
+jump_threshold = 0.18
+
+# --- Dive ---
+# How much wider than your shoulders your hands must be. Being wide is what
+# separates a dive from the hands-on-head pause gesture.
+dive_width_ratio = 1.15
+
+# --- Pause ---
+pause_hold = 1.0
+
+[runtime]
+gamepad = "vgamepad"   # or "null" to run the HUD with no output
+start_paused = false

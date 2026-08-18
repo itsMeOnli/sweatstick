@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  fall-guys:
+    # The intent logic imports neither cv2 nor vgamepad, so it tests fine on
+    # Linux even though the app itself is Windows-only.
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fall-guys
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dev dependencies
+        # Deliberately not installing the package: mediapipe and opencv are
+        # heavy and irrelevant to the pure logic under test.
+        run: pip install pytest ruff
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Test
+        run: pytest
